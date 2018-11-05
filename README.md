@@ -1,5 +1,5 @@
 # PyFontoBene
-Fontobene parser using Python
+FontoBene parser using Python
 
 Hello!! every one
 
