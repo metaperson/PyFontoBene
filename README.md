@@ -41,3 +41,5 @@ https://github.com/fontobene/fontobene
 The FontoBene font file for this parser can be available at
 
 https://github.com/fontobene/fontobene-fonts
+
+https://github.com/fontobene/fontobene-fonts/blob/master/newstroke.bene
