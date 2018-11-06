@@ -10,7 +10,7 @@ this is the first my own project on github.
 
 in the first time using github for me.
 
-I want to join with the original FontoBene project as below.
+I want to join with the original FontoBene project as reference below.
 
 But I am beginner in github. I don't know how to using and join that project.
 
@@ -20,14 +20,15 @@ So I decide to make my own this project first.
 
 # simple 2 steps needed to drawing text.
 
-1. load font file.
+1. load the font file.
 
-  font = PyFontoBeneFont.createFromFile("newstroke.bene")
-
-2. draw font to tkinter canvas
-
-  font.drawText(font_canvas, x=50, y=30, ratio_x=2, ratio_y=2, text="Hello World!!!")
+<pre><code>font = PyFontoBeneFont.createFromFile("newstroke.bene")</code></pre>
   
+2. draw font to tkinter canvas.
+
+  <pre><code>font.drawText(font_canvas, x=50, y=30, ratio_x=2, ratio_y=2, text="Hello World!!!")</code></pre>
+  
+
 
 # Reference
 
