@@ -1,5 +1,5 @@
 # PyFontoBene
-FontoBene parser using Python
+# FontoBene parser using Python
 
 Hello!! every one
 
@@ -18,7 +18,7 @@ So I decide to make my own this project first.
 
 
 
-simple 2 steps needed to drawing text.
+# simple 2 steps needed to drawing text.
 
 1. load font file.
 
@@ -29,6 +29,7 @@ simple 2 steps needed to drawing text.
   font.drawText(font_canvas, x=50, y=30, ratio_x=2, ratio_y=2, text="Hello World!!!")
   
 
+# Reference
 
 The FontoBene project URL
 
