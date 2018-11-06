@@ -1,4 +1,5 @@
 from typing import List, Tuple
+from tkinter import Canvas
 from PyFontoBeneGeometry import *
 from PyFontoBeneGlyph import *
 from PyFontoBeneReader import PyFontoBeneReader
@@ -243,3 +244,83 @@ class PyFontoBeneFont:
                 y_max = glyph_y_max
 
         return x_min, y_min, x_max, y_max
+
+    def drawGlyph(self, canvas: Canvas
+                  , x: float, y: float, ratio_x: float, ratio_y: float
+                  , glyph: PyFontoBeneGlyph) -> float:
+        # self.font_canvas.create_line(0, 0, 100, 100)
+        cursor_advance: float = 0.0
+        for item in glyph.items:
+            item_type = type(item)
+            if item_type is PyFontoBeneGlyphItemPolyline:
+                polyline: PyFontoBeneGlyphItemPolyline = item
+                points: tuple = tuple()
+                for segment in polyline.segments:
+                    cx = segment.x * ratio_x
+                    if cursor_advance < cx:
+                        cursor_advance = cx
+                    px = x + cx
+                    py = y - segment.y * ratio_y
+                    points = points + (px, py)
+                #print(points)
+                if len(points) >= 4:
+                    canvas.create_line(points)
+            elif item_type is PyFontoBeneGlyphItemSpacing:
+                spacing: PyFontoBeneGlyphItemSpacing = item
+                cx = spacing.gap * ratio_x
+                if cursor_advance < cx:
+                    cursor_advance = cx
+            elif item_type is PyFontoBeneGlyphItemReference:
+                reference: PyFontoBeneGlyphItemReference = item
+                ref_glyph = self.findGylph(reference.code)
+                if ref_glyph is not None:
+                    cx = self.drawGlyph(focanvasnt=canvas, x=x, y=y, ratio_x=ratio_x, ratio_y=ratio_y, glyph=ref_glyph)
+                    if cursor_advance < cx:
+                        cursor_advance = cx
+        return cursor_advance
+
+    def drawCode(self, canvas: Canvas
+                  , x: float, y: float, ratio_x: float, ratio_y: float
+                  , char_code: int) -> float:
+        glyph: PyFontoBeneGlyph = self.findGylph(char_code=char_code)
+        if glyph is None:
+            return 0
+        return self.drawGlyph(canvas=canvas, x=x, y=y, ratio_x=ratio_x, ratio_y=ratio_y, glyph=glyph)
+
+    def drawText(self, canvas: Canvas
+                 , x: float, y: float, ratio_x: float, ratio_y: float
+                 , text: str):
+        glyphs = self.stringToGylphList(text)
+        cursor: float = x
+        for glyph in glyphs:
+            if glyph is not None:
+                cursor_advance = self.drawGlyph(canvas=canvas
+                                                , x=cursor, y=y, ratio_x=ratio_x, ratio_y=ratio_y, glyph=glyph)
+                cursor += cursor_advance
+            cursor += self.letter_spacing * ratio_x
+
+    def drawTextWithBoundRect(self, canvas: Canvas
+                 , x: float, y: float, ratio_x: float, ratio_y: float
+                 , text: str):
+        canvas.create_line(x - ratio_x, y, x + ratio_x, y)
+        canvas.create_line(x, y - ratio_y, x, y + ratio_y)
+
+        x1, y1, x2, y2 = self.getStringBoxSpan(text)
+        canvas.create_rectangle(x + (x1 * ratio_x)
+                                          , y - (y1 * ratio_y)
+                                          , x + (x2 * ratio_x)
+                                          , y - (y2 * ratio_y))
+
+        glyphs = self.stringToGylphList(text)
+        cursor: float = x
+        for glyph in glyphs:
+            if glyph is not None:
+                x1, y1, x2, y2 = self.getGlyphBoxSpan(glyph)
+                canvas.create_rectangle(cursor + (x1 * ratio_x)
+                                                  , y - (y1 * ratio_y)
+                                                  , cursor + (x2 * ratio_x)
+                                                  , y - (y2 * ratio_y))
+                cursor_advance = self.drawGlyph(canvas=canvas
+                                                , x=cursor, y=y, ratio_x=ratio_x, ratio_y=ratio_y, glyph=glyph)
+                cursor += cursor_advance
+            cursor += self.letter_spacing * ratio_x
