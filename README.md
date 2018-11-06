@@ -18,7 +18,7 @@ So I decide to make my own this project first.
 
 
 
-# simple 2 steps needed to drawing text.
+# Simple 2 steps needed to drawing text.
 
 1. load the font file.
 
