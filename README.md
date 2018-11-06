@@ -18,6 +18,17 @@ So I decide to make my own this project first.
 
 
 
+simple 2 steps needed to drawing text.
+
+1. load font file.
+
+  font = PyFontoBeneFont.createFromFile("newstroke.bene")
+
+2. draw font to tkinter canvas
+
+  font.drawText(font_canvas, x=50, y=30, ratio_x=2, ratio_y=2, text="Hello World!!!")
+  
+
 
 The FontoBene project URL
 
