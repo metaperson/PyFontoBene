@@ -1,5 +1,5 @@
 # PyFontoBene
-# FontoBene parser using Python
+## FontoBene parser using Python
 
 Hello!! every one
 
@@ -18,7 +18,7 @@ So I decide to make my own this project first.
 
 
 
-# Simple 2 steps needed to drawing text.
+## Simple 2 steps needed to drawing text.
 
 1. load the font file.
 
@@ -30,7 +30,7 @@ So I decide to make my own this project first.
   
 
 
-# Reference
+## Reference
 
 The FontoBene project URL
 
