@@ -3,6 +3,9 @@ FontoBene parser using Python
 
 Hello!! every one
 
+![alt text](https://github.com/metaperson/PyFontoBene/blob/master/ScreenShot/FontoBene%20Drawing%20Test.png)
+
+
 this is the first my own project on github.
 
 in the first time using github for me.
