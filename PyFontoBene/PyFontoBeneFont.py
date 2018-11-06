@@ -1,6 +1,5 @@
 from typing import List, Tuple
 from tkinter import Canvas
-from PyFontoBeneGlyphItem import *
 from PyFontoBeneGlyph import PyFontoBeneGlyph
 from PyFontoBeneReader import PyFontoBeneReader
 from PyFontoBeneWriter import PyFontoBeneWriter
@@ -249,8 +248,8 @@ class PyFontoBeneFont:
         cursor_advance: float = 0.0
         for item in glyph.items:
             item_type = type(item)
-            if item_type is PyFontoBeneGlyphItemPolyline:
-                polyline: PyFontoBeneGlyphItemPolyline = item
+            if item_type is PyFontoBeneGlyph.GlyphItemPolyline:
+                polyline: PyFontoBeneGlyph.GlyphItemPolyline = item
                 points: tuple = tuple()
                 for segment in polyline.segments:
                     cx = segment.x * ratio_x
@@ -262,13 +261,13 @@ class PyFontoBeneFont:
                 # print(points)
                 if len(points) >= 4:
                     canvas.create_line(points)
-            elif item_type is PyFontoBeneGlyphItemSpacing:
+            elif item_type is PyFontoBeneGlyph.GlyphItemSpacing:
                 spacing: PyFontoBeneGlyphItemSpacing = item
                 cx = spacing.gap * ratio_x
                 if cursor_advance < cx:
                     cursor_advance = cx
-            elif item_type is PyFontoBeneGlyphItemReference:
-                reference: PyFontoBeneGlyphItemReference = item
+            elif item_type is PyFontoBeneGlyph.GlyphItemReference:
+                reference: PyFontoBeneGlyph.GlyphItemReference = item
                 ref_glyph = self.findGylph(reference.code)
                 if ref_glyph is not None:
                     cx = self.drawGlyph(canvas=canvas, x=x, y=y, ratio_x=ratio_x, ratio_y=ratio_y, glyph=ref_glyph)
