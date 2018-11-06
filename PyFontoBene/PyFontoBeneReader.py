@@ -1,16 +1,15 @@
 from typing import Tuple
 
+
 class PyFontoBeneReader:
-    def __init__(self):
+    def __init__(self) -> None:
         self.file_name: str = None
         self.file = None
         self.line_text: str = None
         self.line_number: int = 0
-        self.tokens = None
 
     def open(self, file_name: str) -> None:
         self.file_name = file_name
-        # self.file = open(file_name, mode='r', encoding="ascii")
         self.file = open(file_name, mode='r', encoding="UTF-8")
 
     def close(self) -> None:
@@ -22,13 +21,6 @@ class PyFontoBeneReader:
         if not self.line_text:
             return False
         self.line_text = self.line_text.strip()
-        return True
-
-    def readToken(self) -> bool:
-        if not self.readLine():
-            return False
-        if not self.parseToken(self.line_text):
-            return False
         return True
 
     def parseKeyValue(self) -> Tuple[str, str]:

@@ -5,7 +5,7 @@ from PyFontoBeneWriter import PyFontoBeneWriter
 
 
 class PyFontoBeneGlyph:
-    def __init__(self, *, code: int, items: List[PyFontoBeneGlyphItem]):
+    def __init__(self, *, code: int, items: List[PyFontoBeneGlyphItem]) -> None:
         self.code: int = code
         self.items: List[PyFontoBeneGlyphItem] = items
 

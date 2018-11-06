@@ -1,14 +1,12 @@
 from typing import List
-from abc import abstractmethod
 from PyFontoBeneReader import PyFontoBeneReader
 from PyFontoBeneWriter import PyFontoBeneWriter
 
 
 class PyFontoBeneGlyphItem:
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
-    @abstractmethod
     def writeTo(self, writer: PyFontoBeneWriter) -> bool:
         raise NotImplementedError
 
@@ -53,7 +51,6 @@ class PyFontoBeneGlyphItemPolyline(PyFontoBeneGlyphItem):
             self.x: float = x
             self.y: float = y
 
-        @abstractmethod
         def writeTo(self, writer: PyFontoBeneWriter) -> bool:
             raise NotImplementedError
 

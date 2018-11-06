@@ -5,7 +5,6 @@ class PyFontoBeneWriter:
 
     def open(self, file_name: str) -> bool:
         self.file_name = file_name
-        # self.file = open(file_name, mode='w', encoding="ascii")
         self.file = open(file_name, mode='w', encoding="UTF-8", newline="\n")
         if not self.file:
             return False
@@ -52,7 +51,6 @@ class PyFontoBeneWriter:
         else:
             value_str = value_str.lstrip("0")
         return value_str
-
 
     def putKeyValue(self, key: str, value) -> bool:
         self.file.write(key)

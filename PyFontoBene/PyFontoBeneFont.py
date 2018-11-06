@@ -1,7 +1,7 @@
 from typing import List, Tuple
 from tkinter import Canvas
-from PyFontoBeneGeometry import *
-from PyFontoBeneGlyph import *
+from PyFontoBeneGlyphItem import *
+from PyFontoBeneGlyph import PyFontoBeneGlyph
 from PyFontoBeneReader import PyFontoBeneReader
 from PyFontoBeneWriter import PyFontoBeneWriter
 
@@ -12,7 +12,7 @@ class PyFontoBeneFont:
                  , authors: List[str], licenses: List[str]
                  , letter_spacing: float, line_spacing: float
                  , user_attributes: List[Tuple[str, str]]
-                 , glyphs: List[PyFontoBeneGlyph]):
+                 , glyphs: List[PyFontoBeneGlyph]) -> None:
         self.file_format: str = file_format
         self.file_format_version: str = file_format_version
         self.file_comments: List[str] = file_comments
@@ -150,7 +150,7 @@ class PyFontoBeneFont:
                 glyph = PyFontoBeneGlyph.createFrom(reader)
                 if glyph is not None:
                     glyphs.append(glyph)
-            #print(parser_state)
+            # print(parser_state)
             # print(parser.line_text)
         return __class__(file_format=file_format, file_format_version=file_format_version, file_comments=file_comments
                          , font_name=font_name, font_id=font_id, font_version=font_version
@@ -211,8 +211,6 @@ class PyFontoBeneFont:
                     if y_max < glyph_y_max:
                         y_max = glyph_y_max
 
-
-
         return x_min, y_min, x_max, y_max
 
     def getStringBoxSpan(self, text: str) -> (float, float, float, float):
@@ -248,7 +246,6 @@ class PyFontoBeneFont:
     def drawGlyph(self, canvas: Canvas
                   , x: float, y: float, ratio_x: float, ratio_y: float
                   , glyph: PyFontoBeneGlyph) -> float:
-        # self.font_canvas.create_line(0, 0, 100, 100)
         cursor_advance: float = 0.0
         for item in glyph.items:
             item_type = type(item)
@@ -262,7 +259,7 @@ class PyFontoBeneFont:
                     px = x + cx
                     py = y - segment.y * ratio_y
                     points = points + (px, py)
-                #print(points)
+                # print(points)
                 if len(points) >= 4:
                     canvas.create_line(points)
             elif item_type is PyFontoBeneGlyphItemSpacing:
@@ -274,7 +271,7 @@ class PyFontoBeneFont:
                 reference: PyFontoBeneGlyphItemReference = item
                 ref_glyph = self.findGylph(reference.code)
                 if ref_glyph is not None:
-                    cx = self.drawGlyph(focanvasnt=canvas, x=x, y=y, ratio_x=ratio_x, ratio_y=ratio_y, glyph=ref_glyph)
+                    cx = self.drawGlyph(canvas=canvas, x=x, y=y, ratio_x=ratio_x, ratio_y=ratio_y, glyph=ref_glyph)
                     if cursor_advance < cx:
                         cursor_advance = cx
         return cursor_advance
