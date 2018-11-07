@@ -24,7 +24,7 @@ So I decide to make my own this project first.
 
 <pre><code>font = PyFontoBeneFont.createFromFile("newstroke.bene")</code></pre>
   
-2. draw font to tkinter canvas.
+2. draw font on tkinter canvas.
 
   <pre><code>font.drawText(font_canvas, x=50, y=30, ratio_x=2, ratio_y=2, text="Hello World!!!")</code></pre>
   
